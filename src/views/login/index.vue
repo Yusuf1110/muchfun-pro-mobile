@@ -21,7 +21,7 @@
         <i slot="left-icon" class="iconfont icon-mima"></i>
       </van-field>
       <div class="button-submit">
-        <van-button block type="info" native-type="submit">提交</van-button>
+        <van-button block type="info" native-type="submit">登录</van-button>
       </div>
     </van-form>
   </div>
@@ -40,12 +40,17 @@ export default {
   },
   methods: {
     async onSubmit () {
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        duration: 0 // 持续时间永久
+      })
       const user = this.user
       try {
         await userLogin(user)
-        console.log('成功')
+        this.$toast.success('登录成功')
       } catch (err) {
-        console.log(err)
+        this.$toast.fail('手机号或验证码错误！')
       }
     }
   }
@@ -54,6 +59,9 @@ export default {
 <style lang="less">
 @import '../../styles/config.less';
 .login {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(237, 237, 237);
   .button-submit {
     margin: 50px 16.7px;
   }
