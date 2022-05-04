@@ -6,3 +6,10 @@ export const userLogin = ({ mobile, code }) => {
     data: { mobile, code }
   })
 }
+
+export const sandSms = (mobile) => {
+  return request({
+    url: `/v1_0/sms/codes/${mobile}`,
+    method: 'get'
+  })
+}
